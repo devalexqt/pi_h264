@@ -319,6 +319,8 @@ var wa=[Db,rb];var xa=[Eb,qb,sb,pb];var ya=[Fb,Ya,Xa,Fb];var za=[Gb,tb];return{_
     }else{
       this.decode = function decode(typedAr, parInfo) {
         // console.info("Decoding: " + buffer.length);
+        //console.info("Decoding... ");
+
         // collect infos
         if (parInfo){
           this.infoAr.push(parInfo);
