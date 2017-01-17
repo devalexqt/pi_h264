@@ -147,4 +147,8 @@ Raw stream from spawned proccess must be parsed as separate NAL units and sended
 ##Client (html)
 Open page http://_raspberry_ip:8080 
 
-After page was loaded socket connected to server and now you can push start/stop button to start/stop live stream.
+After page was loaded socket connected to server and now you can push start/stop button to start/stop live stream.  
+With 640x360 frame size and 30 fps mode I get no delay (~100ms or less).  
+More resolution = more problem.
+
+
