@@ -81,7 +81,7 @@ OMX_VIDEO_AVCLevelMax
 >sudo make install
 //comilation time 2h-3h
 ```
-After check ffmpeg decoder and encoders:
+After that check ffmpeg decoders and encoders:
 ```
 ffmpeg -decoders
  V..... h264_mmal            h264 (mmal) (codec h264)
@@ -90,10 +90,17 @@ ffmpeg -decoders
  A....D aac                  AAC (Advanced Audio Coding)
 ```
 ```
+ffmpeg -encoders
  V..... h264_omx             OpenMAX IL H.264 video encoder (codec h264)
  VFS... mjpeg                MJPEG (Motion JPEG)
  A..... aac                  AAC (Advanced Audio Coding)
 ```
+Type for more information about encoder/decoder:
+```
+ffmpeg -h decoder=h264_mmal
+ffmpeg -h encoder=h264_omx
+``` 
+
 
 Spawn ffmpeg for get h264 stream from Raspberry Pi camera:
 ```
@@ -127,7 +134,7 @@ var proc=spawn("ffmpeg",[
 ```
 With -vf (video filter option) you can write text, time, etc on video frame encoded in h264!
 
-Raw stream from spawned procees must be parsed as separate NAL units and sended over socket to client.
+Raw stream from spawned proccess must be parsed as separate NAL units and sended over socket to client.
 ```
 	var rawstream=proc.stdout.pipe(new Split(NALseparator))
 
