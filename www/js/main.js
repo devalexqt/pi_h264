@@ -1,6 +1,5 @@
 //var socket = new WebSocket("ws://" + document.location.host)
 //	socket.binaryType = "arraybuffer"
-//var wsavc
 console.log(document.location.host)
 var socket 
 var player
