@@ -136,6 +136,8 @@ With -vf (video filter option) you can write text, time, etc on video frame enco
 
 Raw stream from spawned proccess must be parsed as separate NAL units and sended over socket to client.
 ```
+	const NALseparator    = new Buffer([0,0,0,1]);//NAL break
+	....
 	var rawstream=proc.stdout.pipe(new Split(NALseparator))
 
 		rawstream.on("data",function(data){
