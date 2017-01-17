@@ -1,5 +1,5 @@
 ##Live real time stream with no delay from Raspberry Pi to browser 
-based on boradway https://github.com/mbebenita/Broadway  h264 decoder.
+based on boradway https://github.com/mbebenita/Broadway browser sw h264 decoder.
 
 In browser it use broadway h264 software decoder to decode NAL h264 packets and rende decoded frame to html canvas.  
 For receive NAL h264 baseline packets from server (Raspberry Pi) it use websocket over sockets.io.  
