@@ -1,7 +1,7 @@
 ##Live real time stream with no delay from Raspberry Pi to browser 
-based on boradway https://github.com/mbebenita/Broadway browser sw h264 decoder.
+based on broadway https://github.com/mbebenita/Broadway browser sw h264 decoder.
 
-In browser it use broadway h264 software decoder to decode NAL h264 packets and rende decoded frame to html canvas.  
+In browser it use broadway h264 software decoder to decode NAL h264 packets and rendering decoded frame to html canvas.  
 For receive NAL h264 baseline packets from server (Raspberry Pi) it use websocket over sockets.io.  
 On server it use raspberry camera for get NAL baseline h264 packets from spawned process and send it over sockets.io.  
 
@@ -16,10 +16,10 @@ On server it use raspberry camera for get NAL baseline h264 packets from spawned
     					'-pf', "baseline"//only accepted profile for decoder
     					]);
 ```
- Is it possible to use ffmpeg 3.2 with h264_omx support (need modify libavcodec/omx.c for enable baseline h264 profile, because default is High profile).  
+ Also, its possible to use ffmpeg 3.2 with h264_omx support (need modify libavcodec/omx.c for enable baseline h264 profile, because default is High profile).  
 
-ADD to libavcodec/omx.c at line 518 v3.2 for support baseline profile
-!!!Do not need configure again if you already have compiled  ffmpeg, just run make command!!!
+Add to libavcodec/omx.c at line 518, ffmpeg v3.2, for support baseline profile
+!!!Do not need run ./configure again if you already have compiled  ffmpeg, just run make command!!!
 ```
         avc.eProfile=OMX_VIDEO_AVCProfileBaseline;
 ```
@@ -73,13 +73,13 @@ OMX_VIDEO_AVCLevel51 	Level 5.1
 OMX_VIDEO_AVCLevelMax
  ```
 
+Build ffmpeg with h264 hw decoding and hw encoding enabled and also remove all other codec/format for speed up process.
 ```
 >./configure --disable-encoders --enable-encoder='aac,h264_omx,mjpeg,libx264' --disable-decoders --enable-decoder='rawvideo,mjpeg,aac,h264_mmal' --enable-libfreetype --enable-static --enable-mmal --enable-omx-rpi --enable-yasm --enable-nonfree --enable-gpl --disable-doc
 
 >make -j 4
-
 >sudo make install
-//comilation time 2h-3h
+//comilation time 2h-3h on 1 core Raspberry Pi
 ```
 After that check ffmpeg decoders and encoders:
 ```
@@ -102,7 +102,7 @@ ffmpeg -h encoder=h264_omx
 ``` 
 
 
-Spawn ffmpeg for get h264 stream from Raspberry Pi camera:
+Spawn ffmpeg to get h264 stream from Raspberry Pi camera:
 ```
 var proc=spawn("ffmpeg",[
 						"-s","640x360",
@@ -132,9 +132,9 @@ var proc=spawn("ffmpeg",[
 						"-"
 						])
 ```
-With -vf (video filter option) you can write text, time, etc on video frame encoded in h264!
+With -vf option (video filter)  you can write text, time, etc on video frame encoded in h264!
 
-Raw stream from spawned proccess must be parsed as separate NAL units and sended over socket to client.
+Raw stream from spawned process must be parsed as separate NAL units and sended over socket to client.
 ```
 	const NALseparator    = new Buffer([0,0,0,1]);//NAL break
 	....
