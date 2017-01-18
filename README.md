@@ -23,7 +23,7 @@ Add to libavcodec/omx.c at line 518, ffmpeg v3.2, for support baseline profile
 ```
         avc.eProfile=OMX_VIDEO_AVCProfileBaseline;
 ```
-Example::
+Example:
 ```
    if (avctx->codec->id == AV_CODEC_ID_H264) {
         OMX_VIDEO_PARAM_AVCTYPE avc = { 0 };
